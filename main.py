@@ -1,11 +1,13 @@
+import operator
+
 def main():
     book_path = "books/frankenstein.txt"
     text = get_book_text(book_path)
     word_count = get_word_count(text)
     char_count = get_char_count(text)
     print(text)
-    print(f"There are {word_count} words in this book")
-    print(f"The character count in this book is as follows:\n {char_count}")
+    display_report(word_count, char_count)
+
     
 
 def get_book_text(path):
@@ -26,8 +28,23 @@ def get_char_count(text):
                     count += 1
             char_dictionary[char] = count
     return char_dictionary
-    
 
+
+def display_report(w_count, c_count):
+    c_count_list = []
+    for c in c_count:
+        if c.isalpha() == True:
+            temp_c_dict = {c:c_count[c]}
+            c_count_list.append(temp_c_dict)
+
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{w_count} found in this documents")
+
+    for c_dict in c_count_list:
+        for key, value in c_dict.items():
+            print(f"The {key} character was found {value} times")
+
+    print("--- End report ---")
 
 
 if __name__ == "__main__":
